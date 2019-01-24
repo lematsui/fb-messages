@@ -1,4 +1,5 @@
 const brain = require('brain.js');
+const fs = require('fs');
 
 const network = new brain.recurrent.LSTM();
 
@@ -12,7 +13,7 @@ network.train([
   { input: "hello!", output: "hi!"},
 ]);
 
-const output = network.run("bye!")
+console.log('Done training!');
 
-console.log(output);
-
+const networkJSON = JSON.stringify(network.toJSON());
+fs.writeFileSync('messages-network.json', networkJSON);
